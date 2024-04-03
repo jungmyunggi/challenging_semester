@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import * as React from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -40,17 +41,17 @@ export default function N_1() {
   const priceString3 = result3[0];
   const regex = /[\d\.]+/g;
   const matches1 = priceString1.match(regex);
-  let price1 = matches1 ? parseFloat(matches1[0])*1400 : null;
+  let price1 = matches1 ? parseFloat(matches1[0]) * 1400 : null;
 
   const matches2 = priceString2.match(regex);
-  let price2 = matches2 ? parseFloat(matches2[0])*1400 : null;
+  let price2 = matches2 ? parseFloat(matches2[0]) * 1400 : null;
 
   const matches3 = priceString3.match(regex);
   let price3 = matches3 ? parseFloat(matches3[0]) : null;
-  
-  const A = [0,price1,price1*3,price1*6,price1*12,price1*36,price1*60,price1*120];
-  const B = [0,price2,price2*3,price2*6,price2*12,price2*36,price2*60,price2*120];
-  const C = [price3,price3,price3,price3,price3,price3,price3,price3];
+
+  const A = [0, price1, price1 * 3, price1 * 6, price1 * 12, price1 * 36, price1 * 60, price1 * 120];
+  const B = [0, price2, price2 * 3, price2 * 6, price2 * 12, price2 * 36, price2 * 60, price2 * 120];
+  const C = [price3, price3, price3, price3, price3, price3, price3, price3];
   const xLabels = [
     '0개월',
     '1개월',
@@ -61,26 +62,26 @@ export default function N_1() {
     '5년',
     '10년'
   ];
-  
+
 
 
   return (
-    <div className="result_m">
-      <h1 style={{ fontSize: "80px" }}>결과</h1>
-      <div style={{ display: "flex", position: "relative" }}>
-        <div>
+    <div className="result_m" style={{width:"100%", height:"100%", display: "flex", flexDirection: "column", overflow: "visible", alignItems: "center", justifyContent: "center" }}>
+      
+      <div>
+        <h1 style={{fontSize:"50px"}}>결과</h1>
+      </div>
+      <div style={{width:"1300px", display:"flex"}}>
         <LineChart
-          width={500}
-          height={300}
+          width={1100}
+          height={550}
           series={[
             { data: A, label: 'Cloud A' },
             { data: B, label: 'Cloud B' },
             { data: C, label: 'on-premise' },
-            
           ]}
           xAxis={[{ scaleType: 'point', data: xLabels }]}
         />
-        </div>
       </div>
       <div className="box" style={{ display: "flex", flexDirection: "row" }}>
         <div className="AWS" style={{ display: "flex", flexDirection: "column" }}>
@@ -105,7 +106,7 @@ export default function N_1() {
         <div>
           <h3>On-premise</h3>
           {result3.map((item, index) => (
-            <p><b key={index}>{item}</b></p>
+            <p><b key={index}>{item},</b></p>
           ))}
         </div>
       </div>
@@ -114,7 +115,7 @@ export default function N_1() {
       <Button
         variant="contained"
         onClick={go_Main}
-        style={{ width: "200px", height: "150px", fontSize: "30px" }}
+        style={{ width: "100px", height: "50px", fontSize: "15px" }}
       >
         다시하기
       </Button>
