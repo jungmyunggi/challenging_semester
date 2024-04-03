@@ -17,16 +17,16 @@ export default function N_6() {
     const value = parseInt(event.target.value, 10); // 숫자로 변환
     setoperationSystem(value);
   };
-
-  const aws_linux_url = "https://d64b-165-229-86-164.ngrok-free.app/aws/linux";
+  const baseUrl = "https://4dc0-165-229-86-164.ngrok-free.app"
+  const aws_linux_url = `${baseUrl}/aws/linux`;
   const azure_linux_url =
-    "https://d64b-165-229-86-164.ngrok-free.app/azure/linux";
-  const onpremise_url = "https://d64b-165-229-86-164.ngrok-free.app/on-premise";
+    `${baseUrl}/azure/linux`;
+  const onpremise_url = `${baseUrl}/on-premise`;
 
   const aws_windows_url =
-    "https://d64b-165-229-86-164.ngrok-free.app/aws/window";
+    `${baseUrl}/aws/window`;
   const azure_windows_url =
-    "https://d64b-165-229-86-164.ngrok-free.app/azure/window";
+    `${baseUrl}/azure/window`;
 
   function go_N_Result() {
     const updatedSelectedOptions = {
