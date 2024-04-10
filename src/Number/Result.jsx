@@ -1,12 +1,9 @@
 import Button from "@mui/material/Button";
 import * as React from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-// import { SparkLineChart } from '@mui/x-charts/SparkLineChart';
 import { LineChart } from '@mui/x-charts/LineChart';
-import SimpleLineChart from './123';
-import { display } from "@mui/system";
+import { weeklyusage } from "./4";
+import { usagePerDay } from "./5";
 export default function N_1() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,24 +31,37 @@ export default function N_1() {
     RAM: data2.RAM[Object.keys(data2.RAM)[0]],
     STORAGE: data2.STORAGE[Object.keys(data2.STORAGE)[0]],
   };
-  const result3 = data3.split(',');
-
+  const result3 = {
+    COST: data3.Cost ? data3.Cost[Object.keys(data3.Cost)[0]] : null,
+    CPU: data3[" CPU"] ? data3[" CPU"][Object.keys(data3[" CPU"])[0]] : null,
+    GPU: data3[" GPU"] ? data3[" GPU"][Object.keys(data3[" GPU"])[0]] : null,
+    RAM: data3[" RAM"] ? data3[" RAM"][Object.keys(data3[" RAM"])[0]] : null,
+    STORAGE: data3[" Storage"] ? data3[" Storage"][Object.keys(data3[" Storage"])[0]] : null,
+  };
+  
   const priceString1 = String(result1['COST']);
   const priceString2 = String(result2['COST']);
-  const priceString3 = result3[0];
-  const regex = /[\d\.]+/g;
-  const matches1 = priceString1.match(regex);
-  let price1 = matches1 ? parseFloat(matches1[0]) * 1400 : null;
+  const priceString3 = String(result3['COST']);
 
-  const matches2 = priceString2.match(regex);
-  let price2 = matches2 ? parseFloat(matches2[0]) * 1400 : null;
+  const basicElectricCharges = 1030;
+  const additionalCharge = 120;
 
-  const matches3 = priceString3.match(regex);
-  let price3 = matches3 ? parseFloat(matches3[0]) : null;
+  const matches1 = priceString1.match(/[+-]?([0-9]*[.])?[0-9]+/g);
+  let price1 = matches1 ? parseFloat(matches1[0]) * 1300 : null;
 
-  const A = [0, price1, price1 * 3, price1 * 6, price1 * 12, price1 * 36, price1 * 60, price1 * 120];
-  const B = [0, price2, price2 * 3, price2 * 6, price2 * 12, price2 * 36, price2 * 60, price2 * 120];
-  const C = [price3, price3, price3, price3, price3, price3, price3, price3];
+  const matches2 = priceString2.match(/[+-]?([0-9]*[.])?[0-9]+/g);
+  let price2 = matches2 ? parseFloat(matches2[0]) * 1300 : null;
+
+  const matches3 = priceString3;
+  let price3 = parseFloat(matches3);
+
+  price1 = price1 * usagePerDay * weeklyusage * 4;
+  price2 = price2 * usagePerDay * weeklyusage * 4;
+  
+
+  const A = [0, price1, price1 * 3, price1 * 6, price1 * 12, price1 * 36, price1 * 60];
+  const B = [0, price2, price2 * 3, price2 * 6, price2 * 12, price2 * 36, price2 * 60];
+  const C = [price3, price3+6310, price3+6310*3, price3+6310*6, price3+6310*12, price3+6310*36, price3+6310*60];
   const xLabels = [
     '0개월',
     '1개월',
@@ -59,22 +69,21 @@ export default function N_1() {
     '6개월',
     '1년',
     '3년',
-    '5년',
-    '10년'
+    '5년'
   ];
 
 
 
   return (
-    <div className="result_m" style={{width:"100%", height:"100%", display: "flex", flexDirection: "column", overflow: "visible", alignItems: "center", justifyContent: "center" }}>
-      
+    <div className="result_m" style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", overflow: "visible", alignItems: "center", justifyContent: "center" }}>
+
       <div>
-        <h1 style={{fontSize:"50px"}}>결과</h1>
+        <h1 style={{ fontSize: "50px" }}>결과</h1>
       </div>
-      <div style={{width:"1300px", display:"flex"}}>
+      <div style={{ width: "1300px", display: "flex" }}>
         <LineChart
           width={1100}
-          height={550}
+          height={500}
           series={[
             { data: A, label: 'Cloud A' },
             { data: B, label: 'Cloud B' },
@@ -94,6 +103,7 @@ export default function N_1() {
           <b>가격(month): US${result1['COST']}(대략)</b>
         </div>
         <div style={{ width: "100px" }}></div>
+        
         <div className="Azure" style={{ display: "flex", flexDirection: "column" }}>
           <h3>Cloud B</h3>
           <b>인스턴스 이름: {result2['NAME']}</b>
@@ -103,12 +113,16 @@ export default function N_1() {
           <b>가격(month): {result2['COST']}</b>
         </div>
         <div style={{ width: "100px" }}></div>
-        <div>
-          <h3>On-premise</h3>
-          {result3.map((item, index) => (
-            <p><b key={index}>{item},</b></p>
-          ))}
+        
+        <div className="Azure" style={{ display: "flex", flexDirection: "column" }}>
+          <h3>Cloud B</h3>
+          <b>CPU: {result3['CPU']}</b>
+          <b>RAM: {result3['RAM']}</b>
+          <b>GPU: {result3['GPU']}</b>
+          <b>저장공간: {result3['STORAGE']}</b>
+          <b>가격: {result3['COST']}</b>
         </div>
+        <div style={{ width: "100px" }}></div>
       </div>
       <p></p>
 
@@ -119,6 +133,10 @@ export default function N_1() {
       >
         다시하기
       </Button>
+
+      <button onClick={() => {
+        console.log(data3)
+      }}>asdf</button>
     </div>
   );
 }

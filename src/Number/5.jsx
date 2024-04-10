@@ -6,6 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import React, { useState } from "react";
 
+export let usagePerDay = 0;
 export default function N_5() {
   const movePage = useNavigate();
   const location = useLocation();
@@ -17,6 +18,33 @@ export default function N_5() {
   const handleCheckboxChange = (event) => {
     const value = parseInt(event.target.value, 10); // 숫자로 변환
     setaverageDailyUsageHours(value);
+    if(value === 0){
+      usagePerDay = 1;
+    }
+    else if(value === 1){
+      usagePerDay = 3;
+    }
+    else if(value === 2){
+      usagePerDay = 6;
+    }
+    else if(value === 3){
+      usagePerDay = 9;
+    }
+    else if(value === 4){
+      usagePerDay = 12;
+    }
+    else if(value === 5){
+      usagePerDay = 15;
+    }
+    else if(value === 6){
+      usagePerDay = 18;
+    }
+    else if(value === 7){
+      usagePerDay = 21;
+    }
+    else if(value === 8){
+      usagePerDay = 24;
+    }
   };
 
   function go_N_6() {
@@ -25,6 +53,7 @@ export default function N_5() {
       "일 평균 사용시간 추측": [averageDailyUsageHours],
     };
     console.log(updatedSelectedOptions);
+
     movePage("/N_6", { state: { selectedOptions: updatedSelectedOptions } });
   }
 

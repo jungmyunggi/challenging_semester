@@ -5,34 +5,33 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import React, { useState } from "react";
 import axios from "axios";
-
+import { weeklyusage } from "./4";
+import { usagePerDay } from "./5";
 export default function N_6() {
   const movePage = useNavigate();
   const location = useLocation();
   const { selectedOptions: initialSelectedOptions } = location.state || {};
   const [operationSystem, setoperationSystem] = useState();
   const [estimate, setEstimate] = useState([{}, {}, {}]);
-
   const handleCheckboxChange = (event) => {
     const value = parseInt(event.target.value, 10); // 숫자로 변환
     setoperationSystem(value);
   };
-  const baseUrl = "https://4dc0-165-229-86-164.ngrok-free.app"
+  const baseUrl = "https://50cc-165-229-86-164.ngrok-free.app"
   const aws_linux_url = `${baseUrl}/aws/linux`;
   const azure_linux_url =
     `${baseUrl}/azure/linux`;
   const onpremise_url = `${baseUrl}/on-premise`;
-
   const aws_windows_url =
-    `${baseUrl}/aws/window`;
+    `${baseUrl}/aws/windows`;
   const azure_windows_url =
-    `${baseUrl}/azure/window`;
+    `${baseUrl}/azure/windows`;
 
   function go_N_Result() {
     const updatedSelectedOptions = {
       ...initialSelectedOptions,
     };
-    console.log(operationSystem);
+    console.log(updatedSelectedOptions);
     const data = { survey: updatedSelectedOptions }; // 서버에 보낼 데이터
 
     // 비동기 요청을 저장하는 배열

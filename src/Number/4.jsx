@@ -5,6 +5,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import React, { useState } from "react";
 
+export let weeklyusage = 0;
 export default function N_1() {
   const movePage = useNavigate();
   const location = useLocation();
@@ -16,6 +17,18 @@ export default function N_1() {
   const handleCheckboxChange = (event) => {
     const value = parseInt(event.target.value, 10); // 숫자로 변환
     setaverageDailyUsage(value);
+    if(value === 0){
+      weeklyusage = 1;
+    }
+    else if(value === 1){
+      weeklyusage = 3;
+    }
+    else if(value === 2){
+      weeklyusage = 5;
+    }
+    else if(value === 3){
+      weeklyusage = 7;
+    }
   };
 
   function go_N_5() {
@@ -31,7 +44,7 @@ export default function N_1() {
   return (
     <div>
       <h1>IT 인프라 필요 조사 양식</h1>
-      <h3>4. 일 평균 사용량 추측:</h3>
+      <h3>4. 주간 사용 횟수:</h3>
       <div className="survey">
         <FormGroup>
           <FormControlLabel
@@ -42,7 +55,7 @@ export default function N_1() {
                 onChange={handleCheckboxChange}
               />
             }
-            label="매우 많음 (매일 대량의 데이터를 다운로드 및 업로드함)"
+            label="주 1회"
           />
           <FormControlLabel
             control={
@@ -52,7 +65,7 @@ export default function N_1() {
                 onChange={handleCheckboxChange}
               />
             }
-            label="거의 사용하지 않음 (거의 사용하지 않거나 매우 드물게 사용함)"
+            label="주 3회"
           />
           <FormControlLabel
             control={
@@ -62,7 +75,7 @@ export default function N_1() {
                 onChange={handleCheckboxChange}
               />
             }
-            label="보통 (적당한 양의 데이터를 주로 다운로드 및 업로드함)"
+            label="주 5회"
           />
           <FormControlLabel
             control={
@@ -72,11 +85,11 @@ export default function N_1() {
                 onChange={handleCheckboxChange}
               />
             }
-            label="적음 (가끔 데이터를 다운로드 및 업로드함)"
+            label="주 7회"
           />
         </FormGroup>
         <p>
-          안내: 이 질문은 귀하의 사용량을 추정하기 위한 것입니다. 귀하의 요구에
+          안내: 이 질문은 귀하의 주간 사용량을 추정하기 위한 것입니다. 귀하의 요구에
           가장 적합한 옵션을 선택하십시오.
         </p>
       </div>{" "}
