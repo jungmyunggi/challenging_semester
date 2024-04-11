@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { LineChart } from '@mui/x-charts/LineChart';
 import { weeklyusage } from "./4";
 import { usagePerDay } from "./5";
+import { Gauge } from '@mui/x-charts/Gauge';
+
 export default function N_1() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -38,11 +40,12 @@ export default function N_1() {
     RAM: data3[" RAM"] ? data3[" RAM"][Object.keys(data3[" RAM"])[0]] : null,
     STORAGE: data3[" Storage"] ? data3[" Storage"][Object.keys(data3[" Storage"])[0]] : null,
   };
-  
+
   const priceString1 = String(result1['COST']);
   const priceString2 = String(result2['COST']);
   const priceString3 = String(result3['COST']);
 
+  const [a,setA] = React.useState(75);
   const basicElectricCharges = 1030;
   const additionalCharge = 120;
 
@@ -58,10 +61,9 @@ export default function N_1() {
   price1 = price1 * usagePerDay * weeklyusage * 4;
   price2 = price2 * usagePerDay * weeklyusage * 4;
   
-
-  const A = [0, price1, price1 * 3, price1 * 6, price1 * 12, price1 * 36, price1 * 60];
+  const A = [0, price1, price1 * 1, price1, price1 , price1 , price1 ];
   const B = [0, price2, price2 * 3, price2 * 6, price2 * 12, price2 * 36, price2 * 60];
-  const C = [price3, price3+6310, price3+6310*3, price3+6310*6, price3+6310*12, price3+6310*36, price3+6310*60];
+  const C = [price3, price3 + 6310, price3 + 6310 * 3, price3 + 6310 * 6, price3 + 6310 * 12, price3 + 6310 * 36, price3 + 6310 * 60];
   const xLabels = [
     '0개월',
     '1개월',
@@ -72,14 +74,46 @@ export default function N_1() {
     '5년'
   ];
 
-
-
   return (
     <div className="result_m" style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", overflow: "visible", alignItems: "center", justifyContent: "center" }}>
 
       <div>
         <h1 style={{ fontSize: "50px" }}>결과</h1>
       </div>
+
+      <div className="box" style={{ display: "flex", flexDirection: "row" }}>
+        <div className="AWS" style={{ display: "flex", flexDirection: "column" }}>
+          <h3>Cloud A</h3>
+          <b>인스턴스 이름: {result1['NAME']}</b>
+          <b>코어 수: {result1['CPU']}개</b>
+          <b>RAM: {result1['RAM']}</b>
+          <b>저장공간: {result1['STORAGE']}</b>
+          <b>네트워크: {result1['NET']}</b>
+          <b>가격(month): US${result1['COST']}(대략)</b>
+        </div>
+        <div style={{ width: "100px" }}></div>
+
+        <div className="Azure" style={{ display: "flex", flexDirection: "column" }}>
+          <h3>Cloud B</h3>
+          <b>인스턴스 이름: {result2['NAME']}</b>
+          <b>코어 수: {result2['VCPU']}</b>
+          <b>RAM: {result2['RAM']}</b>
+          <b>저장공간: {result2['STORAGE']}</b>
+          <b>가격(month): {result2['COST']}</b>
+        </div>
+        <div style={{ width: "100px" }}></div>
+
+        <div className="Azure" style={{ display: "flex", flexDirection: "column" }}>
+          <h3>Cloud B</h3>
+          <b>CPU: {result3['CPU']}</b>
+          <b>RAM: {result3['RAM']}</b>
+          <b>GPU: {result3['GPU']}</b>
+          <b>저장공간: {result3['STORAGE']}</b>
+          <b>가격: {result3['COST']}</b>
+        </div>
+        <div style={{ width: "100px" }}></div>
+      </div>
+
       <div style={{ width: "1300px", display: "flex" }}>
         <LineChart
           width={1100}
@@ -92,39 +126,16 @@ export default function N_1() {
           xAxis={[{ scaleType: 'point', data: xLabels }]}
         />
       </div>
-      <div className="box" style={{ display: "flex", flexDirection: "row" }}>
-        <div className="AWS" style={{ display: "flex", flexDirection: "column" }}>
-          <h3>Cloud A</h3>
-          <b>인스턴스 이름: {result1['NAME']}</b>
-          <b>코어 수: {result1['CPU']}개</b>
-          <b>RAM: {result1['RAM']}</b>
-          <b>저장공간: {result1['STORAGE']}</b>
-          <b>네트워크: {result1['NET']}</b>
-          <b>가격(month): US${result1['COST']}(대략)</b>
-        </div>
-        <div style={{ width: "100px" }}></div>
-        
-        <div className="Azure" style={{ display: "flex", flexDirection: "column" }}>
-          <h3>Cloud B</h3>
-          <b>인스턴스 이름: {result2['NAME']}</b>
-          <b>코어 수: {result2['VCPU']}</b>
-          <b>RAM: {result2['RAM']}</b>
-          <b>저장공간: {result2['STORAGE']}</b>
-          <b>가격(month): {result2['COST']}</b>
-        </div>
-        <div style={{ width: "100px" }}></div>
-        
-        <div className="Azure" style={{ display: "flex", flexDirection: "column" }}>
-          <h3>Cloud B</h3>
-          <b>CPU: {result3['CPU']}</b>
-          <b>RAM: {result3['RAM']}</b>
-          <b>GPU: {result3['GPU']}</b>
-          <b>저장공간: {result3['STORAGE']}</b>
-          <b>가격: {result3['COST']}</b>
-        </div>
-        <div style={{ width: "100px" }}></div>
+
+      <div style={{width:"100px", height:"100px"}}>
+      <Gauge
+        value={a}
+        startAngle={0}
+        endAngle={360}
+        innerRadius="80%"
+        outerRadius="100%"
+      />
       </div>
-      <p></p>
 
       <Button
         variant="contained"
@@ -135,8 +146,14 @@ export default function N_1() {
       </Button>
 
       <button onClick={() => {
-        console.log(data3)
+        if(a>=100) {setA(0); return;}
+        setA(a+10)
       }}>asdf</button>
+
+      <button onClick={() => {
+        console.log(a)
+      }}>adsf</button>
+      
     </div>
   );
 }
