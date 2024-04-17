@@ -56,8 +56,8 @@ export default function N_2() {
           <FormControlLabel
             control={
               <Checkbox
-                value="2"
-                checked={performanceImportance === 2}
+                value="3"
+                checked={performanceImportance === 3}
                 onChange={handleCheckboxChange}
               />
             }
@@ -66,8 +66,8 @@ export default function N_2() {
           <FormControlLabel
             control={
               <Checkbox
-                value="3"
-                checked={performanceImportance === 3}
+                value="2"
+                checked={performanceImportance === 2}
                 onChange={handleCheckboxChange}
               />
             }

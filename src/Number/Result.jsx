@@ -4,7 +4,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { LineChart } from '@mui/x-charts/LineChart';
 import { weeklyusage } from "./4";
 import { usagePerDay } from "./5";
+import { period_ofUse } from "./7";
 import { Gauge } from '@mui/x-charts/Gauge';
+import { positions } from "@mui/system";
 
 export default function N_1() {
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ export default function N_1() {
   const data1 = estimate[0];
   const data2 = estimate[1];
   const data3 = estimate[2];
-
+  console.log(estimate);
   const result1 = {
     NAME: data1.NAME[Object.keys(data1.NAME)[0]],
     COST: data1.COST[Object.keys(data1.COST)[0]],
@@ -45,7 +47,6 @@ export default function N_1() {
   const priceString2 = String(result2['COST']);
   const priceString3 = String(result3['COST']);
 
-  const [a,setA] = React.useState(75);
   const basicElectricCharges = 1030;
   const additionalCharge = 120;
 
@@ -61,9 +62,9 @@ export default function N_1() {
   price1 = price1 * usagePerDay * weeklyusage * 4;
   price2 = price2 * usagePerDay * weeklyusage * 4;
   
-  const A = [0, price1, price1 * 1, price1, price1 , price1 , price1 ];
+  const A = [0, price1, price1 * 3, price1 * 6, price1 * 12, price1 * 36, price1 * 60];
   const B = [0, price2, price2 * 3, price2 * 6, price2 * 12, price2 * 36, price2 * 60];
-  const C = [price3, price3 + 6310, price3 + 6310 * 3, price3 + 6310 * 6, price3 + 6310 * 12, price3 + 6310 * 36, price3 + 6310 * 60];
+  const C = [price3, price3, price3 , price3 , price3 , price3 , price3 ];
   const xLabels = [
     '0개월',
     '1개월',
@@ -74,6 +75,28 @@ export default function N_1() {
     '5년'
   ];
 
+  const benefit = { 
+    '1개월': Math.min(price1,price2,price3),
+    '3개월': Math.min(price1*3,price2*3,price3),
+    '6개월': Math.min(price1*6,price2*6,price3),
+    '1년': Math.min(price1*12,price2*12,price3),
+    '3년': Math.min(price1*36,price2*36,price3),
+    '5년': Math.min(price1*60,price2*60,price3)
+
+  }
+  let boxPosition = 0;
+      if ((period_ofUse === 1)) {
+        boxPosition = 820;
+      }else if(period_ofUse === 2){
+        boxPosition = 985; 
+      }else if(period_ofUse === 3){
+        boxPosition = 1155; 
+      }else if(period_ofUse === 4){
+        boxPosition = 1320; 
+      }else if(period_ofUse === 5){
+        boxPosition = 1490; 
+      }
+      
   return (
     <div className="result_m" style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", overflow: "visible", alignItems: "center", justifyContent: "center" }}>
 
@@ -104,7 +127,7 @@ export default function N_1() {
         <div style={{ width: "100px" }}></div>
 
         <div className="Azure" style={{ display: "flex", flexDirection: "column" }}>
-          <h3>Cloud B</h3>
+          <h3>On - premise</h3>
           <b>CPU: {result3['CPU']}</b>
           <b>RAM: {result3['RAM']}</b>
           <b>GPU: {result3['GPU']}</b>
@@ -113,8 +136,8 @@ export default function N_1() {
         </div>
         <div style={{ width: "100px" }}></div>
       </div>
-
       <div style={{ width: "1300px", display: "flex" }}>
+        {/* <div style={{position:"absolute", backgroundColor:"yellowgreen" ,width:`170px`, height:"400px", className:"period", marginTop:"50px",left:`${boxPosition}px` }}></div> */}
         <LineChart
           width={1100}
           height={500}
@@ -126,16 +149,7 @@ export default function N_1() {
           xAxis={[{ scaleType: 'point', data: xLabels }]}
         />
       </div>
-
-      <div style={{width:"100px", height:"100px"}}>
-      <Gauge
-        value={a}
-        startAngle={0}
-        endAngle={360}
-        innerRadius="80%"
-        outerRadius="100%"
-      />
-      </div>
+          
 
       <Button
         variant="contained"
@@ -144,16 +158,10 @@ export default function N_1() {
       >
         다시하기
       </Button>
+          <button onClick={() => {
+            console.log(period_ofUse);
 
-      <button onClick={() => {
-        if(a>=100) {setA(0); return;}
-        setA(a+10)
-      }}>asdf</button>
-
-      <button onClick={() => {
-        console.log(a)
-      }}>adsf</button>
-      
+          }}>asdf</button>
     </div>
   );
 }

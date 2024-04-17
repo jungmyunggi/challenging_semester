@@ -38,8 +38,8 @@ export default function N_6() {
           <FormControlLabel
             control={
               <Checkbox
-                value="0"
-                checked={usageTimeZone === 0}
+                value="4"
+                checked={usageTimeZone === 4}
                 onChange={handleCheckboxChange}
               />
             }
@@ -48,8 +48,8 @@ export default function N_6() {
           <FormControlLabel
             control={
               <Checkbox
-                value="1"
-                checked={usageTimeZone === 1}
+                value="2"
+                checked={usageTimeZone === 2}
                 onChange={handleCheckboxChange}
               />
             }
@@ -58,8 +58,8 @@ export default function N_6() {
           <FormControlLabel
             control={
               <Checkbox
-                value="2"
-                checked={usageTimeZone === 2}
+                value="1"
+                checked={usageTimeZone === 1}
                 onChange={handleCheckboxChange}
               />
             }
@@ -78,8 +78,8 @@ export default function N_6() {
           <FormControlLabel
             control={
               <Checkbox
-                value="4"
-                checked={usageTimeZone === 4}
+                value="0"
+                checked={usageTimeZone === 0}
                 onChange={handleCheckboxChange}
               />
             }

@@ -5,7 +5,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import React, { useState } from "react";
-
+export let period_ofUse = 0;
 export default function N_6() {
   const movePage = useNavigate();
   const location = useLocation();
@@ -17,7 +17,24 @@ export default function N_6() {
   const handleCheckboxChange = (event) => {
     const value = parseInt(event.target.value, 10); // 숫자로 변환
     setperiodOfUse(value);
+    if(value === 3){
+      period_ofUse = 1;
+    }
+    else if(value === 4){
+      period_ofUse = 2;
+    }
+    else if(value === 0){
+      period_ofUse = 3;
+    }
+    else if(value === 1){
+      period_ofUse = 4;
+    }
+    else if(value === 2){
+      period_ofUse = 5;
+    }
   };
+
+ 
 
   function go_N_8() {
     const updatedSelectedOptions = {
@@ -38,12 +55,32 @@ export default function N_6() {
           <FormControlLabel
             control={
               <Checkbox
+                value="3"
+                checked={periodOfUse === 3}
+                onChange={handleCheckboxChange}
+              />
+            }
+            label="6개월 미만"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="4"
+                checked={periodOfUse === 4}
+                onChange={handleCheckboxChange}
+              />
+            }
+            label="6개월~1년"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
                 value="0"
                 checked={periodOfUse === 0}
                 onChange={handleCheckboxChange}
               />
             }
-            label="6개월 미만"
+            label="1년~3년"
           />
           <FormControlLabel
             control={
@@ -53,33 +90,13 @@ export default function N_6() {
                 onChange={handleCheckboxChange}
               />
             }
-            label="6개월~1년"
+            label="3년~5년"
           />
           <FormControlLabel
             control={
               <Checkbox
                 value="2"
                 checked={periodOfUse === 2}
-                onChange={handleCheckboxChange}
-              />
-            }
-            label="1년~3년"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value="3"
-                checked={periodOfUse === 3}
-                onChange={handleCheckboxChange}
-              />
-            }
-            label="3년~5년"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value="4"
-                checked={periodOfUse === 4}
                 onChange={handleCheckboxChange}
               />
             }

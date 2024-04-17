@@ -36,8 +36,8 @@ export default function N_3() {
           <FormControlLabel
             control={
               <Checkbox
-                value="0"
-                checked={saveData === 0}
+                value="3"
+                checked={saveData === 3}
                 onChange={handleCheckboxChange}
               />
             }
@@ -56,8 +56,8 @@ export default function N_3() {
           <FormControlLabel
             control={
               <Checkbox
-                value="2"
-                checked={saveData === 2}
+                value="0"
+                checked={saveData === 0}
                 onChange={handleCheckboxChange}
               />
             }
@@ -66,8 +66,8 @@ export default function N_3() {
           <FormControlLabel
             control={
               <Checkbox
-                value="3"
-                checked={saveData === 3}
+                value="2"
+                checked={saveData === 2}
                 onChange={handleCheckboxChange}
               />
             }

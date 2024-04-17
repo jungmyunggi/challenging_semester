@@ -38,8 +38,8 @@ export default function N_6() {
           <FormControlLabel
             control={
               <Checkbox
-                value="0"
-                checked={technicalSupport === 0}
+                value="1"
+                checked={technicalSupport === 1}
                 onChange={handleCheckboxChange}
               />
             }
@@ -48,8 +48,8 @@ export default function N_6() {
           <FormControlLabel
             control={
               <Checkbox
-                value="1"
-                checked={technicalSupport === 1}
+                value="0"
+                checked={technicalSupport === 0}
                 onChange={handleCheckboxChange}
               />
             }

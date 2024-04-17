@@ -18,31 +18,31 @@ export default function N_5() {
   const handleCheckboxChange = (event) => {
     const value = parseInt(event.target.value, 10); // 숫자로 변환
     setaverageDailyUsageHours(value);
-    if(value === 0){
+    if(value === 3){
       usagePerDay = 1;
     }
-    else if(value === 1){
+    else if(value === 6){
       usagePerDay = 3;
     }
-    else if(value === 2){
+    else if(value === 7){
       usagePerDay = 6;
     }
-    else if(value === 3){
+    else if(value === 8){
       usagePerDay = 9;
     }
-    else if(value === 4){
+    else if(value === 0){
       usagePerDay = 12;
     }
-    else if(value === 5){
+    else if(value === 1){
       usagePerDay = 15;
     }
-    else if(value === 6){
+    else if(value === 2){
       usagePerDay = 18;
     }
-    else if(value === 7){
+    else if(value === 4){
       usagePerDay = 21;
     }
-    else if(value === 8){
+    else if(value === 5){
       usagePerDay = 24;
     }
   };
@@ -66,8 +66,8 @@ export default function N_5() {
           <FormControlLabel
             control={
               <Checkbox
-                value="0"
-                checked={averageDailyUsageHours === 0}
+                value="3"
+                checked={averageDailyUsageHours === 3}
                 onChange={handleCheckboxChange}
               />
             }
@@ -77,8 +77,8 @@ export default function N_5() {
           <FormControlLabel
             control={
               <Checkbox
-                value="1"
-                checked={averageDailyUsageHours === 1}
+                value="6"
+                checked={averageDailyUsageHours === 6}
                 onChange={handleCheckboxChange}
               />
             }
@@ -88,8 +88,8 @@ export default function N_5() {
           <FormControlLabel
             control={
               <Checkbox
-                value="2"
-                checked={averageDailyUsageHours === 2}
+                value="7"
+                checked={averageDailyUsageHours === 7}
                 onChange={handleCheckboxChange}
               />
             }
@@ -100,14 +100,52 @@ export default function N_5() {
           <FormControlLabel
             control={
               <Checkbox
-                value="3"
-                checked={averageDailyUsageHours === 3}
+                value="8"
+                checked={averageDailyUsageHours === 8}
                 onChange={handleCheckboxChange}
               />
             }
             label="
             
             9시간 미만
+            "
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="0"
+                checked={averageDailyUsageHours === 0}
+                onChange={handleCheckboxChange}
+              />
+            }
+            label="
+            
+            12시간 미만
+            "
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="1"
+                checked={averageDailyUsageHours === 1}
+                onChange={handleCheckboxChange}
+              />
+            }
+            label="
+            
+            15시간 미만
+            "
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="2"
+                checked={averageDailyUsageHours === 2}
+                onChange={handleCheckboxChange}
+              />
+            }
+            label="
+            18시간 미만
             "
           />
           <FormControlLabel
@@ -120,7 +158,7 @@ export default function N_5() {
             }
             label="
             
-            12시간 미만
+            21시간 미만
             "
           />
           <FormControlLabel
@@ -128,44 +166,6 @@ export default function N_5() {
               <Checkbox
                 value="5"
                 checked={averageDailyUsageHours === 5}
-                onChange={handleCheckboxChange}
-              />
-            }
-            label="
-            
-            15시간 미만
-            "
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value="6"
-                checked={averageDailyUsageHours === 6}
-                onChange={handleCheckboxChange}
-              />
-            }
-            label="
-            18시간 미만
-            "
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value="7"
-                checked={averageDailyUsageHours === 7}
-                onChange={handleCheckboxChange}
-              />
-            }
-            label="
-            
-            21시간 미만
-            "
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value="8"
-                checked={averageDailyUsageHours === 8}
                 onChange={handleCheckboxChange}
               />
             }
