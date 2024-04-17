@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import Main from "./Number/Main";
 import {N_1, N_2, N_3, N_4, N_5, N_6, N_7, N_8, N_9,N_10, Main, Result } from "./Number"
 import './App.css';
-
+import M from "./Number/123"
 function App() {
   return (
     <div className='main'>
@@ -20,6 +20,8 @@ function App() {
            <Route path='/N_9' element={<N_9/>}></Route>
            <Route path='/N_10' element={<N_10/>}></Route>
            <Route path='/Result' element={<Result/>}></Route>
+           <Route path='/123' element={<M/>}></Route>
+           
 
 
            
