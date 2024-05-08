@@ -20,6 +20,7 @@ const data = {
       label: "Cloud B",
       data: [28, 48, 40, 19, 86],
       borderColor: "blue",
+      
     },
     {
       label: "On-premise",
